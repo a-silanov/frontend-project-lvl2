@@ -8,7 +8,7 @@
   "description": "[![Actions Status](https://github.com/a-silanov/frontend-project-lvl2/workflows/hexlet-check/badge.svg)](https://github.com/a-silanov/frontend-project-lvl2/actions)",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
   "repository": {
     "type": "git",

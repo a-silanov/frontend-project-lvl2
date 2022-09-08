@@ -1,4 +1,4 @@
-import { fileURLToPath } from 'url';
+import { fileURLToPath } from 'node:url';
 import path from 'path';
 import { readFileSync } from 'node:fs';
 import genDiff from '../src/index.js';
@@ -12,6 +12,6 @@ test('check genDiff', () => {
   const expectedText = readFile('test.txt').trim();
   const path1 = getFixturePath('file1.json');
   const path2 = getFixturePath('file2.json');
-  expect(genDiff(path1, path2).toEqual(expectedText));
+  expect(genDiff(path1, path2)).toEqual(expectedText);
   expect(genDiff(path1, path2)).toEqual(expectedText);
 });
