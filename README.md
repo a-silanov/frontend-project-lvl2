@@ -3,9 +3,6 @@
 
 <a href="https://codeclimate.com/github/a-silanov/frontend-project-lvl2/maintainability"><img src="https://api.codeclimate.com/v1/badges/083427bb9ca94b6bbc46/maintainability" /></a>
 
-<a href="https://codeclimate.com/github/a-silanov/frontend-project-lvl2/test_coverage"><img src="https://api.codeclimate.com/v1/badges/083427bb9ca94b6bbc46/test_coverage" /></a>
+[![Test Coverage](https://api.codeclimate.com/v1/badges/083427bb9ca94b6bbc46/test_coverage)](https://codeclimate.com/github/a-silanov/frontend-project-lvl2/test_coverage)
 
 [![asciicast](https://asciinema.org/a/XVoq32sFRfLvBttY8eKZEBlbG.svg)](https://asciinema.org/a/XVoq32sFRfLvBttY8eKZEBlbG)
-
-Test Coverage
-[![Test Coverage](https://api.codeclimate.com/v1/badges/083427bb9ca94b6bbc46/test_coverage)](https://codeclimate.com/github/a-silanov/frontend-project-lvl2/test_coverage)
