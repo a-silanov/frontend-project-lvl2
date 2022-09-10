@@ -18,14 +18,14 @@ test('check genDiff json', () => {
 
 test('check genDiff yaml', () => {
   const path1 = getFixturePath('file1.yaml');
-  const path2 = getFixturePath('file1.yaml');
+  const path2 = getFixturePath('file2.yaml');
   expect(genDiff(path1, path2)).toEqual(expectedText);
   expect(genDiff(path1, path2)).toEqual(expectedText);
 });
 
 test('check genDiff yml', () => {
   const path1 = getFixturePath('file1.yml');
-  const path2 = getFixturePath('file1.yml');
+  const path2 = getFixturePath('file2.yml');
   expect(genDiff(path1, path2)).toEqual(expectedText);
   expect(genDiff(path1, path2)).toEqual(expectedText);
 });
