@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs';
 import _ from 'lodash';
 import path from 'path';
 import parse from './parsers.js';
-import selectFormat from './selectFormat.js';
+import selectFormat from './formaters/index.js';
 
 const getFileData = (filepath) => {
   const readFile = readFileSync(path.resolve(process.cwd(), filepath));

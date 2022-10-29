@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/formaters/stylish.js</title>
+    <title>Code coverage report for src/formaters/plain.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/formaters</a> stylish.js</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/formaters</a> plain.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>40/40</span>
+                <span class='fraction'>35/35</span>
             </div>
         
             
@@ -39,14 +39,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>5/5</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>40/40</span>
+                <span class='fraction'>35/35</span>
             </div>
         
             
@@ -98,45 +98,35 @@
 <a name='L33'></a><a href='#L33'>33</a>
 <a name='L34'></a><a href='#L34'>34</a>
 <a name='L35'></a><a href='#L35'>35</a>
-<a name='L36'></a><a href='#L36'>36</a>
-<a name='L37'></a><a href='#L37'>37</a>
-<a name='L38'></a><a href='#L38'>38</a>
-<a name='L39'></a><a href='#L39'>39</a>
-<a name='L40'></a><a href='#L40'>40</a>
-<a name='L41'></a><a href='#L41'>41</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L36'></a><a href='#L36'>36</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">39x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">39x</span>
+<span class="cline-any cline-yes">21x</span>
+<span class="cline-any cline-yes">21x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">15x</span>
-<span class="cline-any cline-yes">15x</span>
-<span class="cline-any cline-yes">15x</span>
-<span class="cline-any cline-yes">81x</span>
-<span class="cline-any cline-yes">60x</span>
-<span class="cline-any cline-yes">60x</span>
-<span class="cline-any cline-yes">21x</span>
-<span class="cline-any cline-yes">21x</span>
-<span class="cline-any cline-yes">21x</span>
-<span class="cline-any cline-yes">21x</span>
-<span class="cline-any cline-yes">21x</span>
-<span class="cline-any cline-yes">15x</span>
-<span class="cline-any cline-yes">15x</span>
-<span class="cline-any cline-yes">54x</span>
-<span class="cline-any cline-yes">15x</span>
 <span class="cline-any cline-yes">15x</span>
 <span class="cline-any cline-yes">54x</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">54x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-yes">54x</span>
 <span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-yes">54x</span>
-<span class="cline-any cline-yes">9x</span>
-<span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-yes">15x</span>
 <span class="cline-any cline-yes">15x</span>
 <span class="cline-any cline-yes">3x</span>
@@ -145,44 +135,39 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import _ from 'lodash';
 &nbsp;
-const stylish = (tree, replacer = ' ') =&gt; {
-  const getIndent = (spasesCount) =&gt; replacer.repeat((spasesCount * 2));
-  const getBracketIndent = (spasesCount) =&gt; replacer.repeat((spasesCount * 2) - 2);
-&nbsp;
+const plain = (tree) =&gt; {
+  const getValidValue = (value) =&gt; {
+    if (_.isObject(value)) {
+      return '[complex value]';
+    }
+    if (_.isString(value)) {
+      return `'${value}'`;
+    }
+    return value;
+  };
+  const getPath = (path, name) =&gt; [...path, name].join('.');
   const iter = (node, depth) =&gt; {
-    const newIndent = getIndent(depth);
-    const bracketIndent = getBracketIndent(depth);
-    const values = (currentValue, level) =&gt; {
-      if (!_.isObject(currentValue)) {
-        return `${currentValue}`;
-      }
-      const lines = Object
-        .entries(currentValue)
-        .map(([key, value]) =&gt; `${getIndent(level)}  ${key}: ${values(value, level + 2)}`);
-      return ['{', ...lines, `${getBracketIndent(level)}}`].join('\n');
-    };
-&nbsp;
-    const stringRepresentation = node.map((item) =&gt; {
-      if (item.type === 'added') {
-        return `${newIndent}+ ${item.key}: ${values(item.value, depth + 2)}`;
-      }
+    const plainFormat = node.flatMap((item) =&gt; {
       if (item.type === 'deleted') {
-        return `${newIndent}- ${item.key}: ${values(item.value, depth + 2)}`;
+        return `Property '${getPath(depth, item.key)}' was removed`;
+      }
+      if (item.type === 'added') {
+        return `Property '${getPath(depth, item.key)}' was added with value: ${getValidValue(item.value)}`;
       }
       if (item.type === 'nested') {
-        return `${newIndent}  ${item.key}: ${iter(item.children, depth + 2)}`;
+        return iter(item.children, [...depth, item.key]);
       }
-      if (item.type === 'unchanged') {
-        return `${newIndent}  ${item.key}: ${values(item.value, depth + 2)}`;
+      if (item.type === 'changed') {
+        return `Property '${getPath(depth, item.key)}' was updated. From ${getValidValue(item.firstValue)} to ${getValidValue(item.secondValue)}`;
       }
-      return `${newIndent}- ${item.key}: ${values(item.firstValue, depth + 2)}\n${newIndent}+ ${item.key}: ${values(item.secondValue, depth + 2)}`;
+      return [];
     });
-    return ['{', ...stringRepresentation, `${bracketIndent}}`].join('\n');
+    return [...plainFormat].join('\n');
   };
-  return iter(tree, 1);
+  return iter(tree, []);
 };
 &nbsp;
-export default stylish;
+export default plain;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->

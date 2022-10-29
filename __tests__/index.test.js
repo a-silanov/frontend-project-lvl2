@@ -7,25 +7,41 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
 const readFile = (filename) => readFileSync(getFixturePath(filename), 'utf-8');
-const expectedText = readFile('test.txt').trim();
+const expectedStylish = readFile('test.txt').trim();
+const expectedPlain = readFile('plain.txt').trim();
 
-test('check genDiff json', () => {
+test('check stylish json', () => {
   const path1 = getFixturePath('file1.json');
   const path2 = getFixturePath('file2.json');
-  expect(genDiff(path1, path2)).toEqual(expectedText);
-  expect(genDiff(path1, path2)).toEqual(expectedText);
+  expect(genDiff(path1, path2, 'stylish')).toEqual(expectedStylish);
 });
 
-test('check genDiff yaml', () => {
+test('check stylish yaml', () => {
   const path1 = getFixturePath('file1.yaml');
   const path2 = getFixturePath('file2.yaml');
-  expect(genDiff(path1, path2)).toEqual(expectedText);
-  expect(genDiff(path1, path2)).toEqual(expectedText);
+  expect(genDiff(path1, path2, 'stylish')).toEqual(expectedStylish);
 });
 
-test('check genDiff yml', () => {
+test('check stylish yml', () => {
   const path1 = getFixturePath('file1.yml');
   const path2 = getFixturePath('file2.yml');
-  expect(genDiff(path1, path2)).toEqual(expectedText);
-  expect(genDiff(path1, path2)).toEqual(expectedText);
+  expect(genDiff(path1, path2, 'stylish')).toEqual(expectedStylish);
+});
+
+test('check plain json', () => {
+  const path1 = getFixturePath('file1.json');
+  const path2 = getFixturePath('file2.json');
+  expect(genDiff(path1, path2, 'plain')).toEqual(expectedPlain);
+});
+
+test('check plain yaml', () => {
+  const path1 = getFixturePath('file1.yaml');
+  const path2 = getFixturePath('file2.yaml');
+  expect(genDiff(path1, path2, 'plain')).toEqual(expectedPlain);
+});
+
+test('check plain yml', () => {
+  const path1 = getFixturePath('file1.yml');
+  const path2 = getFixturePath('file2.yml');
+  expect(genDiff(path1, path2, 'plain')).toEqual(expectedPlain);
 });
