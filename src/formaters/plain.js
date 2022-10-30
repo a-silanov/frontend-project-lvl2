@@ -10,7 +10,7 @@ const plain = (tree) => {
     }
     return value;
   };
-  const getPath = (path, name) => [...path, name].join('.');
+  const getPath = (path, key) => [...path, key].join('.');
   const iter = (node, depth) => {
     const plainFormat = node.flatMap((item) => {
       if (item.type === 'deleted') {
@@ -27,7 +27,7 @@ const plain = (tree) => {
       }
       return [];
     });
-    return [...plainFormat].join('\n');
+    return plainFormat.join('\n');
   };
   return iter(tree, []);
 };

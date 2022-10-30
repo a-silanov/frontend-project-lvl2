@@ -12,3 +12,13 @@
 [![asciicast](https://asciinema.org/a/ciM7kaM1RTpXhHHxUWqNlKQog.svg)](https://asciinema.org/a/ciM7kaM1RTpXhHHxUWqNlKQog)
 
 [![asciicast](https://asciinema.org/a/alEloIoxF47IvVSOwrCRvAa1c.svg)](https://asciinema.org/a/alEloIoxF47IvVSOwrCRvAa1c)
+
+#### Сравнение вложенных структур в формате plain
+
+
+[![asciicast](https://asciinema.org/a/wKfxc8CxsUlikkv7Je5LILigZ.svg)](https://asciinema.org/a/wKfxc8CxsUlikkv7Je5LILigZ)
+
+#### Сравнение вложенных структур в формате json
+
+
+[![asciicast](https://asciinema.org/a/pBh5MDvb0pUntRULwZdvBzYg1.svg)](https://asciinema.org/a/pBh5MDvb0pUntRULwZdvBzYg1)
