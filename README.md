@@ -5,7 +5,6 @@
 
 [![Test Coverage](https://api.codeclimate.com/v1/badges/083427bb9ca94b6bbc46/test_coverage)](https://codeclimate.com/github/a-silanov/frontend-project-lvl2/test_coverage)
 
-
 ## Difference calculator
 
 Difference calculator is a command line interface (CLI) program that allows you to make a difference between two data structures or configuration files and display them in the format required by the user.
