@@ -14,14 +14,14 @@ Support the following data formats: yaml, json
 
 A report would be generate in the following formats: stylish (default), plain, json
 
-### Install
+### Install programm
 1. ```git@github.com:Latanarie/frontend-project-lvl2.git```
 2. ```make install```
 
-### Test
+### Test programm
 ```make test```
 
-### Start 
+### Start programm
 ```gendiff <filepath1> <filepath2> -f <format>```
 
 ### Information
