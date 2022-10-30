@@ -25,14 +25,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>35/35</span>
+                <span class='fraction'>38/38</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">93.33% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>17/17</span>
+                <span class='fraction'>14/15</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>35/35</span>
+                <span class='fraction'>38/38</span>
             </div>
         
             
@@ -98,10 +98,12 @@
 <a name='L33'></a><a href='#L33'>33</a>
 <a name='L34'></a><a href='#L34'>34</a>
 <a name='L35'></a><a href='#L35'>35</a>
-<a name='L36'></a><a href='#L36'>36</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L36'></a><a href='#L36'>36</a>
+<a name='L37'></a><a href='#L37'>37</a>
+<a name='L38'></a><a href='#L38'>38</a>
+<a name='L39'></a><a href='#L39'>39</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">26x</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
@@ -110,23 +112,27 @@
 <span class="cline-any cline-yes">14x</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">36x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">36x</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">36x</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-yes">36x</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">36x</span>
+<span class="cline-any cline-yes">36x</span>
+<span class="cline-any cline-yes">36x</span>
+<span class="cline-any cline-yes">36x</span>
+<span class="cline-any cline-yes">36x</span>
+<span class="cline-any cline-yes">36x</span>
+<span class="cline-any cline-yes">36x</span>
+<span class="cline-any cline-yes">36x</span>
+<span class="cline-any cline-yes">36x</span>
+<span class="cline-any cline-yes">36x</span>
+<span class="cline-any cline-yes">36x</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -135,32 +141,35 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import _ from 'lodash';
 &nbsp;
+const stringify = (value) =&gt; {
+  if (_.isObject(value)) {
+    return '[complex value]';
+  }
+  if (_.isString(value)) {
+    return `'${value}'`;
+  }
+  return value;
+};
+&nbsp;
+const getPath = (path, key) =&gt; [...path, key].join('.');
+&nbsp;
 const plain = (tree) =&gt; {
-  const getValidValue = (value) =&gt; {
-    if (_.isObject(value)) {
-      return '[complex value]';
-    }
-    if (_.isString(value)) {
-      return `'${value}'`;
-    }
-    return value;
-  };
-  const getPath = (path, key) =&gt; [...path, key].join('.');
   const iter = (node, depth) =&gt; {
     const plainFormat = node.flatMap((item) =&gt; {
-      if (item.type === 'deleted') {
-        return `Property '${getPath(depth, item.key)}' was removed`;
+      switch (item.type) {
+        case 'deleted':
+          return `Property '${getPath(depth, item.key)}' was removed`;
+        case 'added':
+          return `Property '${getPath(depth, item.key)}' was added with value: ${stringify(item.value)}`;
+        case 'nested':
+          return iter(item.children, [...depth, item.key]);
+        case 'changed':
+          return `Property '${getPath(depth, item.key)}' was updated. From ${stringify(item.firstValue)} to ${stringify(item.secondValue)}`;
+        case 'unchanged':
+          return [];
+<span class="branch-0 cbranch-no" title="branch not covered" >        default:</span>
+          throw new Error(`Type ${item.type} is undefined!`);
       }
-      if (item.type === 'added') {
-        return `Property '${getPath(depth, item.key)}' was added with value: ${getValidValue(item.value)}`;
-      }
-      if (item.type === 'nested') {
-        return iter(item.children, [...depth, item.key]);
-      }
-      if (item.type === 'changed') {
-        return `Property '${getPath(depth, item.key)}' was updated. From ${getValidValue(item.firstValue)} to ${getValidValue(item.secondValue)}`;
-      }
-      return [];
     });
     return plainFormat.join('\n');
   };
@@ -175,7 +184,7 @@ export default plain;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-30T10:03:58.246Z
+                at 2022-10-30T18:14:29.233Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

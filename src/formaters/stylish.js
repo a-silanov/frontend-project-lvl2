@@ -1,36 +1,38 @@
 import _ from 'lodash';
 
-const stylish = (tree, replacer = ' ') => {
-  const getIndent = (spasesCount) => replacer.repeat((spasesCount * 2));
-  const getBracketIndent = (spasesCount) => replacer.repeat((spasesCount * 2) - 2);
+const getIndent = (spasesCount, replacer = ' ') => replacer.repeat((spasesCount * 4) - 2);
+const getBracketIndent = (spasesCount, replacer = ' ') => replacer.repeat((spasesCount * 4) - 4);
 
+const getValue = (currentValue, level) => {
+  if (!_.isObject(currentValue)) {
+    return `${currentValue}`;
+  }
+  const lines = Object
+    .entries(currentValue)
+    .map(([key, value]) => `${getIndent(level)}  ${key}: ${getValue(value, level + 1)}`);
+  return ['{', ...lines, `${getBracketIndent(level)}}`].join('\n');
+};
+
+const stylish = (tree) => {
   const iter = (node, depth) => {
     const newIndent = getIndent(depth);
     const bracketIndent = getBracketIndent(depth);
-    const values = (currentValue, level) => {
-      if (!_.isObject(currentValue)) {
-        return `${currentValue}`;
-      }
-      const lines = Object
-        .entries(currentValue)
-        .map(([key, value]) => `${getIndent(level)}  ${key}: ${values(value, level + 2)}`);
-      return ['{', ...lines, `${getBracketIndent(level)}}`].join('\n');
-    };
 
     const stringRepresentation = node.map((item) => {
-      if (item.type === 'added') {
-        return `${newIndent}+ ${item.key}: ${values(item.value, depth + 2)}`;
+      switch (item.type) {
+        case 'added':
+          return `${newIndent}+ ${item.key}: ${getValue(item.value, depth + 1)}`;
+        case 'deleted':
+          return `${newIndent}- ${item.key}: ${getValue(item.value, depth + 1)}`;
+        case 'nested':
+          return `${newIndent}  ${item.key}: ${iter(item.children, depth + 1)}`;
+        case 'unchanged':
+          return `${newIndent}  ${item.key}: ${getValue(item.value, depth + 1)}`;
+        case 'changed':
+          return `${newIndent}- ${item.key}: ${getValue(item.firstValue, depth + 1)}\n${newIndent}+ ${item.key}: ${getValue(item.secondValue, depth + 1)}`;
+        default:
+          throw new Error(`Type ${item.type} is undefined!`);
       }
-      if (item.type === 'deleted') {
-        return `${newIndent}- ${item.key}: ${values(item.value, depth + 2)}`;
-      }
-      if (item.type === 'nested') {
-        return `${newIndent}  ${item.key}: ${iter(item.children, depth + 2)}`;
-      }
-      if (item.type === 'unchanged') {
-        return `${newIndent}  ${item.key}: ${values(item.value, depth + 2)}`;
-      }
-      return `${newIndent}- ${item.key}: ${values(item.firstValue, depth + 2)}\n${newIndent}+ ${item.key}: ${values(item.secondValue, depth + 2)}`;
     });
     return ['{', ...stringRepresentation, `${bracketIndent}}`].join('\n');
   };
