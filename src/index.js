@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import path from 'path';
 import getParse from './parsers.js';
-import calculateDiff from './calculate.js';
+import calculateDiff from './calculateDifference.js';
 import selectFormat from './formaters/index.js';
 
 const getFileData = (filepath) => {
