@@ -9,6 +9,7 @@ const getValue = (currentValue, level) => {
   }
   const lines = Object
     .entries(currentValue)
+
     .map(([key, value]) => `${getIndent(level)}  ${key}: ${getValue(value, level + 1)}`);
   return ['{', ...lines, `${getBracketIndent(level)}}`].join('\n');
 };

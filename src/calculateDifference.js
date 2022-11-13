@@ -2,6 +2,7 @@ import _ from 'lodash';
 
 const calculateDiff = (data1, data2) => {
   const unionKeys = _.union(Object.keys(data1), Object.keys(data2));
+
   const diff = _.sortBy(unionKeys).map((node) => {
     if (!_.has(data2, node)) {
       return { key: node, value: data1[node], type: 'deleted' };
